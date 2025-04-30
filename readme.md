@@ -39,8 +39,7 @@
 - You need to change `Config.StationsCanBeOwnedByPlayers` from `false` to `true`.
 
 # Shop Items
-- You need to place the item image in `mh-fuel/core/html/assets/images/shop/`.
-- You need to add the item in de `server/stations.lua` file in the `ShopItems` table at line 4.
+- You need to add the items in de `server/stations.lua` file in the `ShopItems` table at line 4.
 
 # Dependencies
 - [oxmysql](https://github.com/overextended/oxmysql/releases)
