@@ -39,14 +39,17 @@
 - You need to change `Config.StationsCanBeOwnedByPlayers` from `false` to `true`.
 
 # Shop Items
-- You need to add the items in de `server/stations.lua` file in the `ShopItems` table at line 4.
-
+- You need to add the item in de `server/stations.lua` file in the `ShopItems` table at line 4.
+- when you add new items you need to set `SV_Config.RunDatabaseBackupLoader` from `false` to `true` 
+- when you start the server or script, after that you need to set `SV_Config.RunDatabaseBackupLoader` to `false` again.
+- This will reset the database gasstations and items.
+  
 # Dependencies
 - [oxmysql](https://github.com/overextended/oxmysql/releases)
 - [ox_lib](https://github.com/overextended/ox_lib/releases)
 - [PolyZone](https://github.com/mkafrin/PolyZone/releases)
 - [progressbar](https://github.com/qbcore-framework/progressbar)
-- [qb-target](https://github.com/qbcore-framework/qb-target) or [ox_target](https://github.com/overextended/ox_target/releases)
+- [qb-target](https://github.com/qbcore-framework/qb-target)
 
 # Install
 - Add the `database.sql` to your fivem server database.
