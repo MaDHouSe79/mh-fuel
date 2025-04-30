@@ -1,7 +1,7 @@
 --[[ ===================================================== ]] --
 --[[          MH Fuel System Script by MaDHouSe79          ]] --
 --[[ ===================================================== ]] --
---- Create Load Point Target Load fuel for trailers
+
 function CreateLoadPointTarget(prop)
     local num = 1
     exports["qb-target"]:AddTargetModel(prop, {
@@ -82,7 +82,6 @@ function CreateLoadPointTarget(prop)
     })
 end
 
---- Create Station Load Point Target
 function CreateStationLoadPointTarget()
     local options = {}
     for k, station in pairs(config.GasStations) do
@@ -203,10 +202,8 @@ function CreateStationLoadPointTarget()
         }},
         distance = 2.5
     })
-
 end
 
---- Delete Tanks
 function DeleteTanks()
     for _, tank in pairs(tanks) do
         if DoesEntityExist(tank.entity) then
@@ -215,10 +212,6 @@ function DeleteTanks()
     end
 end
 
---- Delete Hose
----@param rope number
----@param connecction1 number
----@param connecction2 number
 function DeleteHose(rope, connecction1, connecction2)
     for k, v in pairs(ropes) do
         if v.id == rope then
@@ -231,9 +224,6 @@ function DeleteHose(rope, connecction1, connecction2)
     end
 end
 
---- Create Hose
----@param connecction1 number
----@param connecction2 number
 function CreateHose(connecction1, connecction2)
     DeleteMissionBlip()
     local entity1Pos = GetEntityCoords(connecction1)
@@ -253,7 +243,6 @@ function CreateHose(connecction1, connecction2)
     AttachEntitiesToRope(ropes[rope].id, connecction2, connecction1, entity2Pos.x, entity2Pos.y, entity2Pos.z, entity1Pos.x, entity1Pos.y, entity1Pos.z, false, false, nil, nil)
 end
 
--- Spawn Load Hose
 function SpawnLoadHose()
     if tankEntity ~= nil and trailerEntity ~= nil then
         disableControll = true
@@ -274,7 +263,6 @@ function SpawnLoadHose()
     end
 end
 
--- Remove Load Hose
 function RemoveLoadHose()
     FreezeEntityPosition(PlayerPedId(), true)
     local con1 = NetworkGetNetworkIdFromEntity(spawnedPipe)
@@ -296,7 +284,6 @@ function RemoveLoadHose()
     disableControll = false
 end
 
---- Spawn Pump Pipe
 function SpawnPumpConnection(tankEntity)
     if DoesEntityExist(spawnedHoseConnection) then DeleteEntity(spawnedHoseConnection) end
     if currentTrailer ~= nil then
@@ -310,7 +297,6 @@ function SpawnPumpConnection(tankEntity)
     end
 end
 
---- Spawn Tank Connection
 function SpawnTankConnection(tankEntity)
     if DoesEntityExist(spawnedHoseConnection) then DeleteEntity(spawnedHoseConnection) end
     if currentTrailer ~= nil then
@@ -324,7 +310,6 @@ function SpawnTankConnection(tankEntity)
     end
 end
 
---- Spawn Trailer Connection
 function SpawnTrailerConnection()
     if currentTrailer ~= nil then
         local model = "prop_cs_fuel_nozle"
@@ -338,15 +323,12 @@ function SpawnTrailerConnection()
     end
 end
 
---- Delete Load Point Blip
 function DeleteLoadPointBlip()
     if DoesBlipExist(loadBlip) then
         RemoveBlip(loadBlip)
     end
 end
 
---- Create Load point Blip
----@param station table
 function CreateLoadpointBlip(station)
     DeleteLoadPointBlip()
     local blip = AddBlipForCoord(station.coords)
@@ -360,10 +342,6 @@ function CreateLoadpointBlip(station)
     loadBlip = blip
 end
 
---- Spawn Truck
----@param model string
----@param position table
----@param heading number
 function SpawnTruck(model, position, heading)
     LoadModel(model)
     local spawnpoint = vector3(position.x, position.y, position.z)
@@ -386,10 +364,6 @@ function SpawnTruck(model, position, heading)
     return vehicle, plate
 end
 
---- Spawn railer
----@param model string
----@param position table
----@param heading number
 function SpawnTrailer(model, position, heading)
     LoadModel(model)
     local spawnpoint = vector3(position.x, position.y, position.z)
@@ -408,7 +382,6 @@ function SpawnTrailer(model, position, heading)
     return vehicle, plate
 end
 
---- Despawn Truck And Trailer
 function DespawnTruckAndTrailer()
     if isAttach then
         Notify("You trailer is still attached to the tank.")
@@ -425,13 +398,10 @@ function DespawnTruckAndTrailer()
     end
 end
 
---- Get Random Point
 function GetRandomPoint()
     return config.LoadPoints[math.random(1, #config.LoadPoints)]
 end
 
---- Spawn Load Point
----@param data table
 function SpawnLoadPoint(data)
     if not data.hasTank then
         LoadModel(data.tankProp)
@@ -460,7 +430,6 @@ function SpawnLoadPoint(data)
     CreateMissionBlip(data.coords)
 end
 
---- Span Shop Peds
 function SpanShopPeds()
     for k, shop in pairs(config.BuyStationsStores) do
         local model = shop.ped
@@ -476,10 +445,6 @@ function SpanShopPeds()
     end
 end
 
---- Spawn Truck And Trailer
----@param truckModel string
----@param trailerModel string
----@param coords table
 function SpawnTruckAndTrailer(truckModel, trailerModel, coords)
     local heading = coords.w
     if truckModel ~= nil then
@@ -498,19 +463,16 @@ function SpawnTruckAndTrailer(truckModel, trailerModel, coords)
     end
 end
 
---- Refresh Stations
 function RefreshStations()
     TriggerServerEvent('mh-fuel:server:RefreshStations')
 end
 
---- Delete Station Zones
 function DeleteStationZones()
     for k, zone in pairs(stationZones) do
         if zone ~= nil then zone:destroy() end
     end
 end
 
---- Spawn Station Peds
 function SpawnStationPeds()
     QBCore.Functions.TriggerCallback("mh-fuel:server:GetAllStations", function(stations)
         for k, station in pairs(stations) do
@@ -529,8 +491,6 @@ function SpawnStationPeds()
     end)
 end
 
---- Open Garage Menu
----@param id number
 function OpenGarageMenu(id)
     QBCore.Functions.TriggerCallback("mh-fuel:server:GetStationData", function(station)
         local options = {}
@@ -582,8 +542,6 @@ function OpenGarageMenu(id)
     end, id)
 end
 
---- Company Money Menu
----@param id number
 function CompanyMoneyMenu(id)
     QBCore.Functions.TriggerCallback("mh-fuel:server:GetStationData", function(station)
         local options = {}
@@ -653,7 +611,6 @@ function CompanyMoneyMenu(id)
     end, id)
 end
 
---- Buy GasStation Menu
 function BuyGasStationMenu()
     QBCore.Functions.TriggerCallback("mh-fuel:server:GetAllStations", function(stations)
         local options = {}
@@ -731,7 +688,6 @@ function BuyGasStationMenu()
     end)
 end
 
---- Create Zones
 local stationCombo = nil
 function CreateZones()
 
@@ -778,8 +734,6 @@ function CreateZones()
     end
 end
 
---- Buy Station Items (For Owned Stations)
----@param id number, the id is the station id
 function BuyStationItems(id)
     QBCore.Functions.TriggerCallback("mh-fuel:server:GetStationData", function(station)
         local options = {}
@@ -824,7 +778,6 @@ function BuyStationItems(id)
     end, id)
 end
 
---- Change Station Data Menu
 function ManageStationDataMenu(id)
     QBCore.Functions.TriggerCallback("mh-fuel:server:GetStationData", function(station)
         local options = {}
@@ -925,8 +878,6 @@ function ManageStationDataMenu(id)
     end, id)
 end
 
---- Open Store Menu
----@param id number
 function OpenStoreMenu(id)
     QBCore.Functions.TriggerCallback("mh-fuel:server:GetStationData", function(station)
         local options = {}
@@ -970,8 +921,6 @@ function OpenStoreMenu(id)
     end, id)
 end
 
---- Open Station Menu
----@param id number
 function OpenStationMenu(id)
     QBCore.Functions.TriggerCallback("mh-fuel:server:GetStationData", function(station)
         local options = {}
@@ -1086,7 +1035,6 @@ CreateThread(function()
     end
 end)
 
--- Refueling Trailer/Station
 local payfuelprice = 0
 CreateThread(function()
     while true do
@@ -1111,7 +1059,6 @@ CreateThread(function()
                 end
                 Wait(100)
             end
-
             while isFuelingStation do
                 if trailerfuel > 0 then
                     isTankFull = true
@@ -1129,7 +1076,6 @@ CreateThread(function()
     end
 end)
 
--- Display Refueling Trailer/Station
 CreateThread(function()
     while true do
         local sleep = 1000
