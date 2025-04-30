@@ -2,8 +2,6 @@
 --[[          MH Fuel System Script by MaDHouSe79          ]] --
 --[[ ===================================================== ]] --
 
---- Get Vehicle Fuel Bone Position
----@param vehicle number
 function GetVehicleFuelBonePosition(vehicle)
     local isBike = false
     local nozzleOffset = {x = 0.0, y = 0.0, z = 0.0}
@@ -28,7 +26,6 @@ function GetVehicleFuelBonePosition(vehicle)
     return tankBone, nozzleOffset, textOffset, isBike
 end
 
---- Put Nozzle In Vehicle
 function PutNozzleInVehicle()
     local tankBone, nozzlePosition, textPosition, isBike = GetVehicleFuelBonePosition(lastVehicle)
     local tankPosition = GetWorldPositionOfEntityBone(lastVehicle, tankBone)
@@ -45,7 +42,6 @@ function PutNozzleInVehicle()
     TriggerServerEvent("mh-fuel:server:PlayWithinDistance", 5.0, "refuel", maxVolume)
 end
 
---- Take From Vehicle
 function TakeFromVehicle()
     tankBone, nozzlePosition, textPosition, isBike = GetVehicleFuelBonePosition(lastVehicle)
     local tankPosition = GetWorldPositionOfEntityBone(lastVehicle, tankBone)
@@ -63,7 +59,6 @@ function TakeFromVehicle()
     AttachEntityToEntity(spawnedNozzle, PlayerPedId(), GetPedBoneIndex(PlayerPedId(), 0x49D9), pos.x, pos.y, pos.z, rot.x, rot.y, rot.z, true, true, false, true, 1, true)
 end
 
---- Create Vehicle Target
 function CreateVehicleTarget(vehicle)
     exports['qb-target']:AddTargetEntity(vehicle, {
         options = {{
@@ -99,7 +94,6 @@ function CreateVehicleTarget(vehicle)
     })
 end
 
---- Spawn Rope
 function SpawnPumpHose()
     local ped = PlayerPedId()
     TaskTurnPedToFaceEntity(PlayerPedId(), pumpHandle, 5000)
@@ -131,7 +125,6 @@ function SpawnPumpHose()
     CreateVehicleTarget(lastVehicle)
 end
 
---- Remove Rope
 function RemovePumpHose()
     if spawnedHose ~= nil and spawnedNozzle ~= nil then
         TaskTurnPedToFaceEntity(PlayerPedId(), pumpHandle, 5000)
@@ -149,7 +142,6 @@ function RemovePumpHose()
     end
 end
 
---- Delete Blips
 function DeleteBlips()
     for k, blip in pairs(blips) do
         if DoesBlipExist(blip) then
@@ -158,7 +150,6 @@ function DeleteBlips()
     end
 end
 
---- Load Blips
 function LoadBlips()
     for k, station in pairs(config.GasStations) do
         if station and station.coords then
@@ -188,7 +179,6 @@ function LoadBlips()
     end
 end
 
---- Get Nearest GasStation Id
 function GetNearestGasStationId(coords)
     local id = -1
     if config.GasStations ~= nil then
@@ -200,8 +190,6 @@ function GetNearestGasStationId(coords)
     return id
 end
 
---- Refuel With Jerrycan
----@param jerrycanfuelamount number
 function RefuelWithJerrycan(jerrycanfuelamount)
     local refuelAmount = jerrycanfuelamount
     local refueltimer = config.RefuelTime * tonumber(refuelAmount)
@@ -236,8 +224,6 @@ function RefuelWithJerrycan(jerrycanfuelamount)
     end, "weapon_petrolcan")
 end
 
---- Buy Jerrycan
----@param price number
 function BuyJerrycan(price)
     QBCore.Functions.TriggerCallback("mh-fuel:server:HasMoney", function(result)
         if result then
@@ -247,8 +233,6 @@ function BuyJerrycan(price)
     end, price)
 end
 
---- Near Pump Station
----@param coords table
 function NearPumpStation(coords)
     local entity = nil
     for hash in pairs(config.PumpModels) do
@@ -258,9 +242,6 @@ function NearPumpStation(coords)
     if config.PumpModels[GetEntityModel(entity)] then return GetEntityCoords(entity), entity end
 end
 
---- Create Target Controll
---- pump take and return nozzle
----@param prop string
 function CreateTargetControll(prop)
     exports['qb-target']:AddTargetModel(prop, {
         options = {{
@@ -312,7 +293,6 @@ function CreateTargetControll(prop)
     })
 end
 
--- Sound Controller
 CreateThread(function()
     while true do
         Wait(1000)
@@ -338,7 +318,6 @@ CreateThread(function()
     end
 end)
 
--- Fuel consumption
 CreateThread(function()
     while true do
         Wait(1000)
@@ -360,7 +339,6 @@ CreateThread(function()
     end
 end)
 
--- Grab/Return nozzle from and to pump
 CreateThread(function()
     while true do
         local sleep = 500
@@ -395,7 +373,6 @@ CreateThread(function()
     end
 end)
 
--- Refueling player vehicle
 CreateThread(function()
     while true do
         Wait(2000)
@@ -483,7 +460,6 @@ CreateThread(function()
     end
 end)
 
--- Refueling with jerrycan.
 CreateThread(function()
     while true do
         local sleep = 1000
