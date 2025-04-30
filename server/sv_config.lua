@@ -3,38 +3,32 @@
 --[[ ===================================================== ]] --
 SV_Config = {}
 
-SV_Config.Locale = "en"
-
 -- Cash detection
 SV_Config.MoneySign = "€" -- (€/$)
 SV_Config.MoneyType = "cash"
-
+--
 SV_Config.UseTarget = false
 SV_Config.Target = 'qb-target'
-
+--
 SV_Config.EnableNotify = true
 SV_Config.NotifyTitle = "MH Gas Station"
-
+--
 SV_Config.Use3DTest = false
-
 -- Vehiclekey triggers
 SV_Config.IsTriggerServerSide = true
 SV_Config.VehicleKeyTrigger = "qb-vehiclekeys:server:AcquireVehicleKeys"
-
+--
 SV_Config.BaseImagesFolder = 'nui://qb-inventory/html/images'
-
+--
 SV_Config.InteractTxt = "E"
 SV_Config.InterActButton = 38 -- E
-
+--
 SV_Config.RefuelTime = 600
 SV_Config.JerrycanPrice = 500
 SV_Config.FuelPrice = 2
 SV_Config.PriceTick = 2
-
--- true if you want players to own a gas station.
-SV_Config.StationsCanBeOwnedByPlayers = true 
--- true if you want players to own gas station shop.
-SV_Config.StationShopsCanBeOwnedByPlayers = true 
+--
+SV_Config.StationsCanBeOwnedByPlayers = true -- true if you want players to own a gas station.
 
 --[[ Job Vehicle To Get And Reload Fuel for gasstation owners ]] --
 SV_Config.DeliverVehicle = "packer"
@@ -220,24 +214,6 @@ SV_Config.LoadPoints = {
             color = SV_Config.LoadPointBlipColor,
             scale = SV_Config.LoadPointBlipScale
         }
-    },
-}
-
-
-SV_Config.CreateFuel = {
-    vehicle = {model="tanker2", load_capacity = 500},
-    props = {"p_oil_pjack_01_s", "p_oil_pjack_03_s", "p_oil_pjack_02_amo", "p_oil_pjack_03_amo", "p_oil_pjack_01_amo"},
-    pumpoil = {
-        timer = 100,
-        neededitem = 'emptyoilbarrel',
-        rewarditem = 'oilbarrel',
-        capacity = 50,
-        amount = 1
-    },
-
-    neededItems = {
-        {item = "oilbarrel", amount = 1},
-        {item = "hide", amount = 5}, 
     },
 }
 
