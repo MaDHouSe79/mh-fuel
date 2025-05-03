@@ -4,7 +4,7 @@
     <h3 align="center">A passionate allround developer </h3>    
 </p>
 
-# MH Cash As Item
+# MH Fuel
 - Download: https://github.com/MH-Scripts
 - Youtube: https://www.youtube.com/c/@MaDHouSe79
 
