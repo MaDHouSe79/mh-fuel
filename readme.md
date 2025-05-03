@@ -7,5 +7,3 @@
 # MH Fuel
 - Download: https://github.com/MH-Scripts
 - Youtube: https://www.youtube.com/c/@MaDHouSe79
-
-&copy; [MaDHouSe79](https://www.youtube.com/@MaDHouSe79)
