@@ -22,7 +22,7 @@
 </p>
 
 <p align="center">
-    <img alig src="https://github-profile-trophy.vercel.app/?username=MaDHouSe79&margin-w=15&column=6" />
+    <img alig src="https://github-profile-trophy.vercel.app/?username=MaDHouSe79&margin-w=15&column=8" />
 </p>
 
 # MH Fuel for QB-Core - (OneSync Required)
@@ -81,4 +81,5 @@ exports['mh-fuel']:GetFuel(vehicle) -- get fuel
 # LICENSE
 [GPL LICENSE](./LICENSE)<br />
 &copy; [MaDHouSe79](https://www.youtube.com/@MaDHouSe79)
+
 
