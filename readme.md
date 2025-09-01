@@ -25,7 +25,7 @@
     <img alig src="https://github-profile-trophy.vercel.app/?username=MaDHouSe79&margin-w=15&column=6" />
 </p>
 
-# MH Fuel for QB-Core - (OneSync Required) (BETA Version)
+# MH Fuel for QB-Core - (OneSync Required)
 - A fuel script with a fuel station as job and shop build in that sync fuel between all players.
 
 # Company vehicles
@@ -81,3 +81,4 @@ exports['mh-fuel']:GetFuel(vehicle) -- get fuel
 # LICENSE
 [GPL LICENSE](./LICENSE)<br />
 &copy; [MaDHouSe79](https://www.youtube.com/@MaDHouSe79)
+
